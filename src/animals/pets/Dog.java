@@ -6,7 +6,6 @@ import data.ColorData;
 public class Dog extends Animal {
     public Dog(String name, int age, int weight, ColorData color) {
         super(name, age, weight, color);
-
     }
 
     @Override

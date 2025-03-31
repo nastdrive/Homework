@@ -22,7 +22,6 @@ public class Main {
         NumberTools numberTools = new NumberTools();
 
         while (true) {
-
             List<String> nameStr = new ArrayList<>();
             for (CommandsData commandsData : CommandsData.values()) {
                 nameStr.add(commandsData.name().toLowerCase());
@@ -46,8 +45,8 @@ public class Main {
                 continue;
             }
 
-            switch (CommandsData.valueOf(userCommandsUpperCase)) {
-                case ADD: {
+                    switch (CommandsData.valueOf(userCommandsUpperCase)) {
+                    case ADD: {
                     addAnimal (animals,numberTools);
                     break;
                     }
@@ -63,9 +62,9 @@ public class Main {
                 }
             }
         }
-    private static void addAnimal(List<Animal> animals, NumberTools numberTools) {
+            private static void addAnimal(List<Animal> animals, NumberTools numberTools) {
 
-        while (true) {
+            while (true) {
             System.out.println("Какое животное добавить? cat/dog/duck");
             String typeAnimal = scan.next().trim().toUpperCase();
 
@@ -75,31 +74,49 @@ public class Main {
             } catch (IllegalArgumentException e) {
                 System.out.println("Такого животного нет");
                 continue;
-
             }
 
             System.out.println("Введите имя животного");
             String name = scan.next().trim();
 
+            int age;
 
+            while (true) {
                 System.out.println("Введите возраст");
-                int age = Integer.parseInt(scan.next().trim());
+                String ageInput = scan.next().trim();
 
-                System.out.println("Введите вес");
-                int weight = Integer.parseInt(scan.next().trim());
+                if (numberTools.isNumber(ageInput)) {
+                    age = Integer.parseInt(ageInput);
+                    break;
+                } else {
+                    System.out.println("Ошибка! Введите целое число от 1 до 99");
+                }
+            }
+                int weight;
+
+                while (true) {
+                    System.out.println("Введите вес");
+                    String weightInput = scan.next().trim();
+
+                    if (numberTools.isNumber(weightInput)) {
+                        weight = Integer.parseInt(weightInput);
+                        break;
+                    } else {
+                        System.out.println("Ошибка! Введите целое число от 1 до 99");
+                    }
+                }
 
                 ColorData color;
 
-                while (true) {
-                    System.out.println("Введите цвет black/white/brown");
-                    String colorCommand = scan.next().trim().toUpperCase();
-                    try {
-                        color = ColorData.valueOf(String.valueOf(colorCommand));
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Такого цвета нет");
-                        continue;
-                    }
-
+                    while (true) {
+                        System.out.println("Введите цвет black/white/brown");
+                        String colorCommand = scan.next().trim().toUpperCase();
+                        try {
+                            color = ColorData.valueOf(String.valueOf(colorCommand));
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Такого цвета нет");
+                            continue;
+                        }
 
                     AnimalFactory factory = new AnimalFactory(name, age, weight, color);
                     Animal animal = factory.create(type);
@@ -109,11 +126,8 @@ public class Main {
                     break;
                 }
                 break;
-             }
-
-
             }
-
+            }
         }
 
 

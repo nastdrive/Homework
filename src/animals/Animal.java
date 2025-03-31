@@ -60,27 +60,16 @@ public abstract class Animal {
         if(age >= 11 && age <=14) {
             return "лет";
         }
-
         int ostatok = age %10;
-
 
         if(ostatok ==1) {
             return "год";
         }
-
         if(ostatok >= 2 && ostatok <4) {
             return "года";
         }
-
             return "лет";
-
-
-
-
         }
-
-
-
 }
 
 
