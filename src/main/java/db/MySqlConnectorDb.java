@@ -13,8 +13,18 @@ public class MySqlConnectorDb implements IDatabase {
 
     private void openConnectToDb() throws SQLException, IOException {
         if (connection == null) {
-            Map<String,String> settings = new FilePropertiesReader().getSettings();
-            connection = DriverManager.getConnection(settings.get("url"), settings.get("login"), settings.get("password"));
+            Map<String, String> settings = new FilePropertiesReader().getSettings();
+            String url = settings.get("url");
+            String username = settings.get("login");
+            String password = settings.get("password");
+
+            if (username == null || username.isEmpty()) {
+                username = System.getenv("db_username");
+            }
+            if (password == null || password.isEmpty()); {
+                password = System.getenv("db_password");
+            }
+            connection = DriverManager.getConnection(url, username, password);
         }
         if (statement == null) {
             statement = connection.createStatement();
